@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     function loadContent() {
-        fetch('api.php')
+        fetch('data.php')
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`Network response was not ok: ${response.statusText}`);
@@ -24,21 +24,20 @@ document.addEventListener('DOMContentLoaded', function() {
     function populatePage(data) {
         document.getElementById('about-text-content').textContent = data.about_text;
         
-       // Divisi
-    const divisionGrid = document.getElementById('division-grid');
-    divisionGrid.innerHTML = ''; // Mengosongkan grid sebelum diisi
-    data.divisions.forEach(division => {
-        // Mengubah template untuk kartu gambar
-        const cardHTML = `
-            <div class="division-card" style="background-image: url('${division.image_url}');">
-                <div class="card-content">
-                    <h3>${division.title}</h3>
-                    <p class="card-description">${division.description}</p>
+        // Divisi
+        const divisionGrid = document.getElementById('division-grid');
+        divisionGrid.innerHTML = ''; // Kosongkan grid sebelum diisi
+        data.divisions.forEach(division => {
+            const cardHTML = `
+                <div class="division-card" style="background-image: url('${division.image_url}');">
+                    <div class="card-content">
+                        <h3>${division.title}</h3>
+                        <p class="card-description">${division.description}</p>
+                    </div>
                 </div>
-            </div>
-        `;
-        divisionGrid.innerHTML += cardHTML;
-    });
+            `;
+            divisionGrid.innerHTML += cardHTML;
+        });
 
         document.getElementById('map-container').innerHTML = data.contact.map_iframe;
         
@@ -73,7 +72,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }, { threshold: 0.1 });
 
-        // === PERUBAHAN KUNCI DI SINI ===
         const navObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -86,15 +84,27 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                 }
             });
-        // Opsi "root" dihapus agar observer menggunakan viewport, sesuai dengan struktur CSS baru
-        }, { rootMargin: '-50% 0px -50% 0px' }); 
+        }, { rootMargin: '-50% 0px -50% 0px' });
+
+        const bgObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bg = entry.target.getAttribute('data-bg');
+                    if (bg) {
+                        document.body.style.backgroundImage = `url('${bg}')`;
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
 
         sections.forEach(section => {
             animationObserver.observe(section);
             navObserver.observe(section);
+            bgObserver.observe(section);
         });
     }
 
     loadContent();
     setupObservers();
+
 });

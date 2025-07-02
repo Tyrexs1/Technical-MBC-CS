@@ -84,9 +84,9 @@ h3 {
 
 /* --- Header --- */
 header {
-    background: rgba(0, 0, 0, 0.666);
+    background: rgba(0, 0, 0, 0.479);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff00;
     position: fixed;
     top: 0;
     left: 0;
@@ -185,7 +185,7 @@ nav a.active::after {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
-    background: #0000005f;
+    background: #000000a7;
     padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -222,7 +222,7 @@ nav a.active::after {
 
 /* --- Developer Section --- */
 .developer-layout {
-    background: #0000006d;
+    background: #000000ae;
     padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -317,4 +317,8 @@ nav a.active::after {
     h2 {
         font-size: 1.5rem;
     }
+}
+
+body {
+    transition: background-image 0.8s ease-in-out;
 }
