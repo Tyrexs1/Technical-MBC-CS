@@ -16,7 +16,7 @@ body {
     overflow-x: hidden;
 
     /* --- GAYA BACKGROUND GAMBAR --- */
-    background-image: url('/Asset/background.jpg'); /* Ganti dengan nama file Anda */
+    background-image: url('Asset/background.jpg'); /* Ganti dengan nama file Anda */
     background-size: cover;
     background-position: center;
     background-attachment: fixed; /* Membuat gambar diam saat scroll */

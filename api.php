@@ -13,22 +13,22 @@ $siteData = [
         [
             'title' => 'Cyber Security',
             'description' => 'Menganalisis dan mengembangkan teknik pertahanan untuk melindungi sistem, jaringan, dan data dari serangan siber.',
-            'image_url' => '/Asset/cyber.jpg' // <-- Tambahkan ini
+            'image_url' => 'Asset/cyber.jpg' // <-- Tambahkan ini
         ],
         [
             'title' => 'Game Tech',
             'description' => 'Merancang dan mengembangkan teknologi interaktif, termasuk game, simulasi, dan aplikasi Virtual/Augmented Reality.',
-            'image_url' => '/Asset/gt.jpg' // <-- Tambahkan ini
+            'image_url' => 'Asset/gt.jpg' // <-- Tambahkan ini
         ],
         [
             'title' => 'Big Data',
             'description' => 'Mengolah dan menganalisis set data bervolume besar untuk menemukan pola, tren, dan wawasan yang berharga.',
-            'image_url' => '/Asset/data.jpg' // <-- Tambahkan ini
+            'image_url' => 'Asset/data.jpg' // <-- Tambahkan ini
         ],
         [
             'title' => 'Geographic Information System',
             'description' => 'Mengintegrasikan data spasial untuk visualisasi dan analisis geografis, mendukung pengambilan keputusan berbasis lokasi.',
-            'image_url' => '/Asset/gis.jpg' // <-- Tambahkan ini
+            'image_url' => 'Asset/gis.jpg' // <-- Tambahkan ini
         ]
     ],
     
