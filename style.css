@@ -1,4 +1,4 @@
-/* --- Reset & Gaya Dasar --- */
+/* --- Reset & Basic Styles --- */
 * {
     margin: 0;
     padding: 0;
@@ -6,53 +6,90 @@
 }
 
 html {
-    scroll-behavior: smooth; /* Untuk klik navigasi yang mulus */
+    scroll-behavior: smooth;
 }
 
 body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;
-    color: #333;
-    background-color: #f4f7f6;
+    color: #ffffff; /* Ubah warna teks utama menjadi putih agar terlihat */
+    overflow-x: hidden;
+
+    /* --- GAYA BACKGROUND GAMBAR --- */
+    background-image: url('/Asset/background.jpg'); /* Ganti dengan nama file Anda */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Membuat gambar diam saat scroll */
+    background-repeat: no-repeat;
 }
 
-/* --- Tata Letak Utama --- */
-.page-section {
+/* --- LAPISAN OVERLAY (SANGAT DISARANKAN) --- */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    /* Menggunakan padding untuk memberi jarak, bukan tinggi tetap */
-    padding: 6rem 2rem; 
-    border-bottom: 1px solid #e0e0e0;
+    height: 100%;
+    /* Overlay hitam 50% transparan. Ubah 0.5 menjadi lebih tinggi (misal 0.7) untuk lebih gelap */
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: -1; /* Meletakkan overlay di belakang konten */
 }
 
-.page-section:last-child {
-    border-bottom: none;
+/* --- Main Scroll Container --- */
+main {
+    min-height: 100vh;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
 }
 
+/* --- Section Styling --- */
+.page-section {
+    min-height: 100vh;
+    width: 100%;
+    scroll-snap-align: start;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 2rem;
+}
+
+/* --- Container & Animation --- */
 .container {
     width: 90%;
     max-width: 1100px;
-    margin: 0 auto;
+    margin: 0 auto 2rem auto;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-/* --- Tipografi --- */
+.container.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Typography --- */
 h2 {
-    font-size: 2.2rem;
-    font-weight: 600;
+    font-size: 2.5rem;
+    font-weight: 700;
     margin-bottom: 2rem;
     text-align: center;
+    word-wrap: break-word;
 }
 
 h3 {
-    margin-bottom: 0.5rem;
-    color: #007BFF;
+    word-wrap: break-word;
 }
 
 /* --- Header --- */
 header {
-    background: #ffffff; /* Latar belakang solid */
-    border-bottom: 1px solid #ddd;
-    position: sticky; /* Header menempel di atas saat scroll */
+    background: rgba(0, 0, 0, 0.666);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #ffffff;
+    position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
     z-index: 1000;
 }
@@ -61,87 +98,148 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 5%;
+    padding: 0.8rem 5%;
 }
 
 .logo img {
-    height: 50px; /* Ukuran logo disesuaikan */
-    width: auto;
+    width: 100px;
+    height: 70px;
+    display: block;
 }
 
 nav a {
-    margin-left: 20px;
-    color: #555;
+    margin-left: 25px;
+    color: #ffffff;
     font-weight: 500;
     text-decoration: none;
-    transition: color 0.2s;
+    transition: color 0.3s;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #007BFF;
+    transition: width 0.3s ease-in-out;
 }
 
 nav a:hover,
 nav a.active {
-    color: #007BFF;
-    text-decoration: underline; /* Efek hover sederhana */
+    color: #007bff;
 }
 
-/* --- Gaya Per Bagian --- */
+nav a.active::after {
+    width: 100%;
+}
 
-/* Tentang Kami */
+/* --- About Section --- */
 .about-content {
     display: flex;
     align-items: center;
-    gap: 30px;
-}
-.about-content img {
-    max-width: 150px;
+    gap: 50px;
+    text-align: left;
 }
 
-/* Divisi */
+.about-content img {
+    max-width: 200px;
+    height: auto;
+}
+
+/* --- Divisi Section --- */
 .division-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Grid responsif otomatis */
-    gap: 1.5rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+    justify-items: stretch;
+    align-items: stretch;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
 }
 
 .division-card {
     background: #fff;
-    padding: 1.5rem;
-    border: 1px solid #e0e0e0; /* Garis batas sebagai pengganti bayangan */
-    border-radius: 8px;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(121, 121, 121, 0.08);
+    text-align: left;
 }
 
-/* Kontak */
+.division-card h3 {
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+}
+
+.card-description {
+    color: #ffffff; /* Ganti kode warna ini sesuai keinginan Anda */
+}
+
+/* --- Kontak Section --- */
 .contact-layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
+    background: #0000005f;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 .map-container {
-    min-height: 300px;
+    min-height: 350px;
     border-radius: 8px;
     overflow: hidden;
+}
+
+.contact-info .address-text {
+    margin-bottom: 1.5rem;
+    display: block;
 }
 
 .social-logos {
     display: flex;
     gap: 20px;
-    margin-top: 1rem;
+    justify-content: center;
 }
 
 .social-logos a svg {
-    width: 30px;
-    height: 30px;
-    fill: #555;
-}
-.social-logos a:hover svg {
-    fill: #007BFF;
+    width: 40px;
+    height: 40px;
+    fill: #ffffff;
+    transition: fill 0.3s ease, transform 0.3s ease;
 }
 
-/* Developer */
+.social-logos a:hover svg {
+    fill: #007BFF;
+    transform: scale(1.1);
+}
+
+/* --- Developer Section --- */
 .developer-layout {
+    background: #0000006d;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     display: grid;
-    grid-template-columns: 2fr 1.5fr;
-    gap: 2rem;
+    /* 3 kolom: 2 untuk info, 1 untuk foto */
+    grid-template-columns: 2fr 2fr 1.5fr;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.developer-layout a {
+    color: #007BFF;
+}
+
+.photo-column {
+    display: flex;
+    justify-content: center;
     align-items: center;
 }
 
@@ -150,31 +248,73 @@ nav a.active {
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
+    border: 4px solid #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 
-/* --- Pengaturan Responsif untuk Mobile --- */
+/* --- Media Queries for Responsiveness --- */
 @media (max-width: 768px) {
+    main {
+        scroll-snap-type: none; /* Nonaktifkan snap di mobile */
+    }
+
+    h2 {
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+    }
+
     .header-container {
         flex-direction: column;
-        gap: 1rem;
+        gap: 15px;
+        padding: 0.8rem 5%;
     }
 
-    nav {
+    nav a {
+        margin-left: 15px;
+    }
+
+    .about-content {
+        flex-direction: column;
+        align-items: center;
         text-align: center;
+        gap: 20px;
     }
 
-    .about-content,
     .contact-layout,
-    .developer-layout {
-        flex-direction: column; /* Semua layout tumpuk ke bawah */
-        grid-template-columns: 1fr; /* Untuk yang menggunakan grid */
-        text-align: center;
+    .developer-layout,
+    .division-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .division-grid {
         gap: 2rem;
+    }
+    
+    .developer-layout {
+        text-align: center;
+        gap: 1.5rem;
     }
 
     .photo-column {
-        order: -1; /* Pindahkan foto ke atas */
-        margin-bottom: 1rem;
+        order: -1; /* Pindahkan foto ke atas di mobile */
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 95%;
+        max-width: 100%;
+        padding: 1rem;
+    }
+
+    nav a {
+        margin-left: 10px;
+        font-size: 0.9rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
     }
 }
