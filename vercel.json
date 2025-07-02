@@ -1,9 +1,10 @@
 {
-  "functions": {
-    "api/api.php": {
-      "runtime": "vercel-php@0.6.0"
+  "builds": [
+    {
+      "src": "api/api.php",
+      "use": "vercel-php@0.6.0"
     }
-  },
+  ],
   "rewrites": [
     {
       "source": "/api/api",
