@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     function loadContent() {
-        fetch('/api/api.php')
+        fetch('api.php')
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`Network response was not ok: ${response.statusText}`);

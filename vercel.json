@@ -1,14 +1,14 @@
 {
   "builds": [
     {
-      "src": "api/api.php",
+      "src": "api.php",
       "use": "vercel-php@0.6.0"
     }
   ],
   "rewrites": [
     {
-      "source": "/api/api",
-      "destination": "/api/api.php"
+      "source": "api.php",
+      "destination": "api.php"
     }
   ]
 }
