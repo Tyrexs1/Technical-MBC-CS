@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-
     function loadContent() {
         fetch('/api')
             .then(response => {
@@ -81,6 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function setupObservers() {
         const sections = document.querySelectorAll('.page-section');
         const navLinks = document.querySelectorAll('nav a');
+        const backgroundOverlay = document.getElementById('background-overlay');
 
         const animationObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
@@ -110,10 +110,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const bgObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const bg = entry.target.getAttribute('data-bg');
-                    if (bg) {
-                        document.body.style.backgroundImage = `url('${bg}')`;
+                if (entry.isIntersecting && backgroundOverlay) {
+                    const newBg = entry.target.getAttribute('data-bg');
+                    if (newBg) {
+                        // Tambahkan transisi manual agar smooth
+                        backgroundOverlay.style.opacity = 0;
+                        setTimeout(() => {
+                            backgroundOverlay.style.backgroundImage = `url('${newBg}')`;
+                            backgroundOverlay.style.opacity = 1;
+                        }, 300);
                     }
                 }
             });

@@ -1,313 +1,322 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
-    line-height: 1.6;
-    color: #ffffff;
-    overflow-x: hidden;
-    background-image: url('/Asset/background.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    transition: background-image 0.6s ease-in-out;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+  color: #ffffff;
+  overflow-x: hidden;
+  position: relative;
 }
 
 body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: -1;
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+}
+
+#background-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/Asset/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  z-index: -2;
+  opacity: 1;
+  transition: opacity 0.8s ease-in-out;
 }
 
 main {
-    min-height: 100vh;
-    overflow-y: auto;
-    scroll-snap-type: y mandatory;
+  min-height: 100vh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
 }
 
 .page-section {
-    min-height: 100vh;
-    width: 100%;
-    scroll-snap-align: start;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 4rem 2rem;
+  min-height: 100vh;
+  width: 100%;
+  scroll-snap-align: start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 2rem;
 }
 
 .container {
-    width: 90%;
-    max-width: 1100px;
-    margin: 0 auto 2rem auto;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto 2rem auto;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
 .container.visible {
-    opacity: 1;
-    transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 h2 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 2rem;
-    text-align: center;
-    word-wrap: break-word;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+  word-wrap: break-word;
 }
 
 h3 {
-    word-wrap: break-word;
+  word-wrap: break-word;
 }
 
 header {
-    background: rgba(0, 0, 0, 0.479);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid #ffffff00;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
+  background: rgba(0, 0, 0, 0.479);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #ffffff00;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
 .header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.8rem 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 5%;
 }
 
 .logo img {
-    width: 100px;
-    height: 70px;
-    display: block;
+  width: 100px;
+  height: 70px;
+  display: block;
 }
 
 nav a {
-    margin-left: 25px;
-    color: #ffffff;
-    font-weight: 500;
-    text-decoration: none;
-    transition: color 0.3s;
-    position: relative;
-    padding-bottom: 5px;
+  margin-left: 25px;
+  color: #ffffff;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s;
+  position: relative;
+  padding-bottom: 5px;
 }
 
 nav a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: #007BFF;
-    transition: width 0.3s ease-in-out;
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #007BFF;
+  transition: width 0.3s ease-in-out;
 }
 
 nav a:hover,
 nav a.active {
-    color: #007bff;
+  color: #007bff;
 }
 
 nav a.active::after {
-    width: 100%;
+  width: 100%;
 }
 
 .about-content {
-    display: flex;
-    align-items: center;
-    gap: 50px;
-    text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  text-align: left;
 }
 
 .about-content img {
-    max-width: 200px;
-    height: auto;
+  max-width: 200px;
+  height: auto;
 }
 
 .division-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 3rem;
-    justify-items: stretch;
-    align-items: stretch;
-    width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  justify-items: stretch;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
 }
 
 .division-card {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(121, 121, 121, 0.08);
-    text-align: left;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  background: #ffffff14;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(121, 121, 121, 0.08);
+  text-align: left;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
 .division-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 30px rgba(0, 123, 255, 0.3);
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(0, 123, 255, 0.3);
 }
 
-/* Warna untuk elemen di dalam division-card */
 .division-card h3 {
-    margin-bottom: 0.5rem;
-    color: #ffffff;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
 }
 
 .division-card .card-description {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .contact-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    background: #000000a7;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  background: #000000a7;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 .map-container {
-    min-height: 350px;
-    border-radius: 8px;
-    overflow: hidden;
+  min-height: 350px;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .contact-info .address-text {
-    margin-bottom: 1.5rem;
-    display: block;
+  margin-bottom: 1.5rem;
+  display: block;
 }
 
-/* Gaya dan animasi ikon sosial */
 .social-logos {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
 }
 
 .social-logos a img {
-    width: 40px;
-    height: 40px;
-    transition: filter 0.3s ease, transform 0.3s ease;
-    filter: brightness(0) invert(1); /* awal: putih */
+  width: 40px;
+  height: 40px;
+  transition: filter 0.3s ease, transform 0.3s ease;
+  filter: brightness(0) invert(1);
 }
 
 .social-logos a:hover img {
-    filter: brightness(0) invert(27%) sepia(92%) saturate(748%) hue-rotate(193deg) brightness(95%) contrast(95%);
-    transform: scale(1.1);
+  filter: brightness(0) invert(27%) sepia(92%) saturate(748%) hue-rotate(193deg) brightness(95%) contrast(95%);
+  transform: scale(1.1);
 }
 
 .developer-layout {
-    background: #000000ae;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    display: grid;
-    grid-template-columns: 2fr 2fr 1.5fr;
-    gap: 2.5rem;
-    align-items: center;
+  background: #000000ae;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  display: grid;
+  grid-template-columns: 2fr 2fr 1.5fr;
+  gap: 2.5rem;
+  align-items: center;
 }
 
 .developer-layout a {
-    color: #007BFF;
+  color: #007BFF;
 }
 
 .photo-column {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .photo-column img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid #fff;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-    main {
-        scroll-snap-type: none;
-    }
+  main {
+    scroll-snap-type: none;
+  }
 
-    h2 {
-        font-size: 1.75rem;
-        margin-bottom: 1rem;
-    }
+  h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+  }
 
-    .header-container {
-        flex-direction: column;
-        gap: 15px;
-        padding: 0.8rem 5%;
-    }
+  .header-container {
+    flex-direction: column;
+    gap: 15px;
+    padding: 0.8rem 5%;
+  }
 
-    nav a {
-        margin-left: 15px;
-    }
+  nav a {
+    margin-left: 15px;
+  }
 
-    .about-content {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 20px;
-    }
+  .about-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+  }
 
-    .contact-layout,
-    .developer-layout,
-    .division-grid {
-        grid-template-columns: 1fr;
-    }
+  .contact-layout,
+  .developer-layout,
+  .division-grid {
+    grid-template-columns: 1fr;
+  }
 
-    .division-grid {
-        gap: 2rem;
-    }
+  .division-grid {
+    gap: 2rem;
+  }
 
-    .developer-layout {
-        text-align: center;
-        gap: 1.5rem;
-    }
+  .developer-layout {
+    text-align: center;
+    gap: 1.5rem;
+  }
 
-    .photo-column {
-        order: -1;
-        margin-bottom: 1.5rem;
-    }
+  .photo-column {
+    order: -1;
+    margin-bottom: 1.5rem;
+  }
 }
 
 @media (max-width: 480px) {
-    .container {
-        width: 95%;
-        max-width: 100%;
-        padding: 1rem;
-    }
+  .container {
+    width: 95%;
+    max-width: 100%;
+    padding: 1rem;
+  }
 
-    nav a {
-        margin-left: 10px;
-        font-size: 0.9rem;
-    }
+  nav a {
+    margin-left: 10px;
+    font-size: 0.9rem;
+  }
 
-    h2 {
-        font-size: 1.5rem;
-    }
+  h2 {
+    font-size: 1.5rem;
+  }
 }

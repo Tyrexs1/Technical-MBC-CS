@@ -27,7 +27,7 @@ const siteData = {
     instagram_handle: "@mbclab",
     linkedin_url: "https://www.linkedin.com/company/mbclaboratory/",
     linkedin_handle: "MBC Laboratory",
-    address: "Telkom University, TULT 13.04, ...",
+    address: "Telkom University, TULT 13.04, TULT 11.12, Jl. Telekomunikasi. 1, Terusan Buahbatu - Bojongsoang, Telkom University, Sukapura, Kec. Dayeuhkolot, Kabupaten Bandung, Jawa Barat 40257",
     map_iframe: `<iframe src="https://www.google.com/maps/embed?pb=..." width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`
   },
   developer: {

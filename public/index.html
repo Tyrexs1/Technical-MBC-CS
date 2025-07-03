@@ -1,90 +1,94 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MBC Laboratory</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MBC Laboratory by roby</title>
+  
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
-    <header>
-        <div class="header-container">
-            <a href="#" class="logo">
-                <img src="/Asset/mbclogo.png" alt="Logo MBC Lab">
-            </a>
-            <nav>
-                <a href="#about" class="active">Tentang</a>
-                <a href="#divisi">Divisi</a>
-                <a href="#kontak">Kontak</a>
-                <a href="#developer">Developer</a>
-            </nav>
+
+  <div id="background-overlay" style="background-image: url('/Asset/background.jpg');"></div>
+
+  <header>
+    <div class="header-container">
+      <a href="#" class="logo">
+        <img src="/Asset/mbclogo.png" alt="Logo MBC Lab" />
+      </a>
+      <nav>
+        <a href="#about" class="active">Tentang</a>
+        <a href="#divisi">Divisi</a>
+        <a href="#kontak">Kontak</a>
+        <a href="#developer">Developer</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section id="about" class="page-section" data-bg="/Asset/aboutbg.jpg">
+      <div class="container">
+        <div class="about-content">
+          <img src="/Asset/mbclogo.png" alt="Logo MBC Lab Besar" />
+          <div class="about-text">
+            <h2>Tentang Kami</h2>
+            <p id="about-text-content">Memuat data...</p>
+          </div>
         </div>
-    </header>
+      </div>
+    </section>
 
-    <main>
-        <section id="about" class="page-section" data-bg="/Asset/aboutbg.jpg">
-            <div class="container">
-                <div class="about-content">
-                    <img src="/Asset/mbclogo.png" alt="Logo MBC Lab Besar">
-                    <div class="about-text">
-                        <h2>Tentang Kami</h2>
-                        <p id="about-text-content">Memuat data...</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <section id="divisi" class="page-section" data-bg="/Asset/divisibg.jpg">
+      <div class="container">
+        <h2>Divisi & Layanan</h2>
+        <div id="division-grid" class="division-grid"></div>
+      </div>
+    </section>
 
-        <section id="divisi" class="page-section" data-bg="/Asset/divisibg.jpg">
-            <div class="container">
-                <h2>Divisi & Layanan</h2>
-                <div id="division-grid" class="division-grid"></div>
+    <section id="kontak" class="page-section" data-bg="/Asset/kontakbg.jpg">
+      <div class="container">
+        <h2>Hubungi Kami</h2>
+        <div class="contact-layout">
+          <div id="map-container" class="map-container"></div>
+          <div class="contact-info">
+            <h3>Informasi Kontak</h3>
+            <p id="contact-address" class="address-text"></p>
+            <div class="social-logos">
+              <a id="contact-instagram" href="#" target="_blank">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/instagram.svg" alt="Instagram" />
+              </a>
+              <a id="contact-linkedin" href="#" target="_blank">
+                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/linkedin.svg" alt="LinkedIn" />
+              </a>
             </div>
-        </section>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <section id="kontak" class="page-section" data-bg="/Asset/kontakbg.jpg">
-            <div class="container">
-                <h2>Hubungi Kami</h2>
-                <div class="contact-layout">
-                    <div id="map-container" class="map-container"></div>
-                    <div class="contact-info">
-                        <h3>Informasi Kontak</h3>
-                        <p id="contact-address" class="address-text"></p>
-                        <div class="social-logos">
-                            <a id="contact-instagram" href="#" target="_blank" rel="noopener noreferrer" title="Instagram" style="margin-right: 10px;">
-                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/instagram.svg" alt="Instagram" width="32" height="32">
-                            </a>
-                            <a id="contact-linkedin" href="#" target="_blank" rel="noopener noreferrer" title="LinkedIn">
-                                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v10/icons/linkedin.svg" alt="LinkedIn" width="32" height="32">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <section id="developer" class="page-section" data-bg="/Asset/devbg.jpg">
+      <div class="container">
+        <h2>Developer</h2>
+        <div class="developer-layout">
+          <div class="photo-column">
+            <img src="/Asset/foto.jpg" alt="Foto Developer" />
+          </div>
+          <div>
+            <p><strong>Nama:</strong> <span id="dev-name">...</span></p>
+            <p><strong>NIM:</strong> <span id="dev-nim">...</span></p>
+            <p><strong>Email:</strong> <a id="dev-email" href="#">...</a></p>
+          </div>
+          <div>
+            <p><strong>GitHub:</strong> <a id="dev-github" href="#" target="_blank">...</a></p>
+            <p><strong>Keahlian:</strong> <span id="dev-skills">...</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-        <section id="developer" class="page-section" data-bg="/Asset/developerbg.jpg">
-            <div class="container">
-                <h2>Informasi Developer</h2>
-                <div class="developer-layout">
-                    <div class="info-column">
-                        <h4>Detail</h4>
-                        <p><strong>Nama:</strong> <span id="dev-name"></span></p>
-                        <p><strong>NIM:</strong> <span id="dev-nim"></span></p>
-                        <p><strong>Email:</strong> <a id="dev-email"></a></p>
-                        <p><strong>GitHub:</strong> <a id="dev-github" target="_blank" rel="noopener noreferrer"></a></p>
-                    </div>
-                    <div class="info-column">
-                        <h4>Kompetensi Teknis</h4>
-                        <p id="dev-skills"></p>
-                    </div>
-                    <div class="photo-column">
-                        <img src="/Asset/foto.jpg" alt="Foto Developer">
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+  <script src="script.js"></script>
 </body>
 </html>
