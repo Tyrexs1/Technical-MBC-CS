@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Preload background images
+
     function preloadImages(imageUrls) {
         imageUrls.forEach(url => {
             const img = new Image();
