@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
         grid.innerHTML = '';
         data.divisions.forEach(div => {
             grid.innerHTML += `
-            <div class="division-card fade-in-element" style="background-image: url('${div.image_url}'); background-size: cover;">
+            <div class="division-card" style="background-image: url('${div.image_url}'); background-size: cover;">
                 <div class="card-content">
                     <h3>${div.title}</h3>
                     <p class="card-description">${div.description}</p>
@@ -68,21 +68,14 @@ document.addEventListener('DOMContentLoaded', function () {
         const backgroundOverlay = document.getElementById('background-overlay');
         let currentBg = '';
 
-        // Seleksi semua elemen yang ingin diberi animasi fade-in
-        const fadeElements = document.querySelectorAll(
-            '.container, .about-content, .division-card, .contact-layout, .developer-layout'
-        );
-
         const fadeObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in-visible');
-                    fadeObserver.unobserve(entry.target);
+                    const container = entry.target.querySelector('.container');
+                    if (container) container.classList.add('visible');
                 }
             });
-        }, { threshold: 0.15 });
-
-        fadeElements.forEach(el => fadeObserver.observe(el));
+        }, { threshold: 0.1 });
 
         const navObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -116,6 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }, { threshold: 0.5 });
 
         sections.forEach(section => {
+            fadeObserver.observe(section);
             navObserver.observe(section);
             bgObserver.observe(section);
         });
