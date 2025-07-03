@@ -61,4 +61,6 @@ app.get('/api', (req, res) => {
   res.json(siteData);
 });
 
-module.exports = app;
+module.exports = (req, res) => {
+  res.status(200).json(siteData);
+};
