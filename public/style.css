@@ -1,4 +1,3 @@
-/* --- Reset & Basic Styles --- */
 * {
     margin: 0;
     padding: 0;
@@ -12,18 +11,16 @@ html {
 body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;
-    color: #ffffff; /* Ubah warna teks utama menjadi putih agar terlihat */
+    color: #ffffff;
     overflow-x: hidden;
-
-    /* --- GAYA BACKGROUND GAMBAR --- */
-    background-image: url('/Asset/background.jpg'); /* Ganti dengan nama file Anda */
+    background-image: url('/Asset/background.jpg');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* Membuat gambar diam saat scroll */
+    background-attachment: fixed;
     background-repeat: no-repeat;
+    transition: background-image 0.8s ease-in-out;
 }
 
-/* --- LAPISAN OVERLAY (SANGAT DISARANKAN) --- */
 body::before {
     content: '';
     position: fixed;
@@ -31,19 +28,16 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    /* Overlay hitam 50% transparan. Ubah 0.5 menjadi lebih tinggi (misal 0.7) untuk lebih gelap */
-    background-color: rgba(0, 0, 0, 0.5); 
-    z-index: -1; /* Meletakkan overlay di belakang konten */
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
 }
 
-/* --- Main Scroll Container --- */
 main {
     min-height: 100vh;
     overflow-y: auto;
     scroll-snap-type: y mandatory;
 }
 
-/* --- Section Styling --- */
 .page-section {
     min-height: 100vh;
     width: 100%;
@@ -54,7 +48,6 @@ main {
     padding: 4rem 2rem;
 }
 
-/* --- Container & Animation --- */
 .container {
     width: 90%;
     max-width: 1100px;
@@ -69,7 +62,6 @@ main {
     transform: translateY(0);
 }
 
-/* --- Typography --- */
 h2 {
     font-size: 2.5rem;
     font-weight: 700;
@@ -82,7 +74,6 @@ h3 {
     word-wrap: break-word;
 }
 
-/* --- Header --- */
 header {
     background: rgba(0, 0, 0, 0.479);
     backdrop-filter: blur(10px);
@@ -137,7 +128,6 @@ nav a.active::after {
     width: 100%;
 }
 
-/* --- About Section --- */
 .about-content {
     display: flex;
     align-items: center;
@@ -150,7 +140,6 @@ nav a.active::after {
     height: auto;
 }
 
-/* --- Divisi Section --- */
 .division-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -169,18 +158,24 @@ nav a.active::after {
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(121, 121, 121, 0.08);
     text-align: left;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
+.division-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 123, 255, 0.3);
+}
+
+/* Warna untuk elemen di dalam division-card */
 .division-card h3 {
     margin-bottom: 0.5rem;
     color: #ffffff;
 }
 
-.card-description {
-    color: #ffffff; /* Ganti kode warna ini sesuai keinginan Anda */
+.division-card .card-description {
+    color: #ffffff;
 }
 
-/* --- Kontak Section --- */
 .contact-layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -202,32 +197,31 @@ nav a.active::after {
     display: block;
 }
 
+/* Gaya dan animasi ikon sosial */
 .social-logos {
     display: flex;
     gap: 20px;
     justify-content: center;
 }
 
-.social-logos a svg {
+.social-logos a img {
     width: 40px;
     height: 40px;
-    fill: #ffffff;
-    transition: fill 0.3s ease, transform 0.3s ease;
+    transition: filter 0.3s ease, transform 0.3s ease;
+    filter: brightness(0) invert(1); /* awal: putih */
 }
 
-.social-logos a:hover svg {
-    fill: #007BFF;
+.social-logos a:hover img {
+    filter: brightness(0) invert(27%) sepia(92%) saturate(748%) hue-rotate(193deg) brightness(95%) contrast(95%);
     transform: scale(1.1);
 }
 
-/* --- Developer Section --- */
 .developer-layout {
     background: #000000ae;
     padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     display: grid;
-    /* 3 kolom: 2 untuk info, 1 untuk foto */
     grid-template-columns: 2fr 2fr 1.5fr;
     gap: 2.5rem;
     align-items: center;
@@ -252,11 +246,10 @@ nav a.active::after {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-
-/* --- Media Queries for Responsiveness --- */
+/* Responsive */
 @media (max-width: 768px) {
     main {
-        scroll-snap-type: none; /* Nonaktifkan snap di mobile */
+        scroll-snap-type: none;
     }
 
     h2 {
@@ -286,18 +279,18 @@ nav a.active::after {
     .division-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .division-grid {
         gap: 2rem;
     }
-    
+
     .developer-layout {
         text-align: center;
         gap: 1.5rem;
     }
 
     .photo-column {
-        order: -1; /* Pindahkan foto ke atas di mobile */
+        order: -1;
         margin-bottom: 1.5rem;
     }
 }
@@ -317,8 +310,4 @@ nav a.active::after {
     h2 {
         font-size: 1.5rem;
     }
-}
-
-body {
-    transition: background-image 0.8s ease-in-out;
 }
