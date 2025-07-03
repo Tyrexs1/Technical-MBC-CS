@@ -1,99 +1,78 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // Preload background images
+    function preloadImages(imageUrls) {
+        imageUrls.forEach(url => {
+            const img = new Image();
+            img.src = url;
+        });
+    }
+
+    preloadImages([
+        '/Asset/aboutbg.jpg',
+        '/Asset/divisibg.jpg',
+        '/Asset/kontakbg.jpg',
+        '/Asset/developerbg.jpg',
+    ]);
 
     function loadContent() {
         fetch('/api')
             .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Network response was not ok: ${response.statusText}`);
-                }
+                if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
                 return response.json();
             })
             .then(data => {
-                console.log("Data loaded:", data);
                 populatePage(data);
-                setupObservers(); 
+                setupObservers();
             })
             .catch(error => {
-                console.error('Fetch Error:', error);
                 document.body.innerHTML = `<div style="text-align: center; padding: 50px; font-family: 'Poppins', sans-serif;">
-                                                <h2 style="color: #d93025;">Gagal Memuat Data</h2>
-                                                <p>Pastikan server lokal (misalnya Node.js) berjalan dan file <strong>api.js</strong> aktif.</p>
-                                                <p><em>Error: ${error.message}</em></p>
-                                               </div>`;
+                    <h2 style="color: #d93025;">Gagal Memuat Data</h2>
+                    <p>Pastikan server lokal aktif dan file <strong>api.js</strong> berjalan.</p>
+                    <p><em>Error: ${error.message}</em></p>
+                </div>`;
             });
     }
 
     function populatePage(data) {
-        const aboutText = document.getElementById('about-text-content');
-        if (aboutText) aboutText.textContent = data.about_text;
+        document.getElementById('about-text-content').textContent = data.about_text;
 
-        const divisionGrid = document.getElementById('division-grid');
-        if (divisionGrid) {
-            divisionGrid.innerHTML = '';
-            data.divisions.forEach(division => {
-                const cardHTML = `
-                    <div class="division-card" style="background-image: url('${division.image_url}'); background-size: cover; background-position: center;">
-                        <div class="card-content">
-                            <h3>${division.title}</h3>
-                            <p class="card-description">${division.description}</p>
-                        </div>
-                    </div>
-                `;
-                divisionGrid.insertAdjacentHTML('beforeend', cardHTML);
-            });
-        }
+        const grid = document.getElementById('division-grid');
+        grid.innerHTML = '';
+        data.divisions.forEach(div => {
+            grid.innerHTML += `
+            <div class="division-card" style="background-image: url('${div.image_url}'); background-size: cover;">
+                <div class="card-content">
+                    <h3>${div.title}</h3>
+                    <p class="card-description">${div.description}</p>
+                </div>
+            </div>`;
+        });
 
-        const mapContainer = document.getElementById('map-container');
-        if (mapContainer) mapContainer.innerHTML = data.contact.map_iframe;
+        document.getElementById('map-container').innerHTML = data.contact.map_iframe;
+        document.getElementById('contact-instagram').href = data.contact.instagram_url;
+        document.getElementById('contact-linkedin').href = data.contact.linkedin_url;
+        document.getElementById('contact-address').textContent = data.contact.address;
 
-        const contactInstagram = document.getElementById('contact-instagram');
-        if (contactInstagram) contactInstagram.href = data.contact.instagram_url;
-
-        const contactLinkedIn = document.getElementById('contact-linkedin');
-        if (contactLinkedIn) contactLinkedIn.href = data.contact.linkedin_url;
-
-        const contactAddress = document.getElementById('contact-address');
-        if (contactAddress) contactAddress.textContent = data.contact.address;
-
-        const devName = document.getElementById('dev-name');
-        if (devName) devName.textContent = data.developer.name;
-
-        const devNim = document.getElementById('dev-nim');
-        if (devNim) devNim.textContent = data.developer.nim;
-
-        const devEmail = document.getElementById('dev-email');
-        if (devEmail) {
-            devEmail.textContent = data.developer.email;
-            devEmail.href = `mailto:${data.developer.email}`;
-        }
-
-        const devGithub = document.getElementById('dev-github');
-        if (devGithub) {
-            devGithub.href = data.developer.github_url;
-            devGithub.textContent = data.developer.github_text;
-        }
-
-        const devSkills = document.getElementById('dev-skills');
-        if (devSkills) devSkills.textContent = data.developer.skills;
-
-        console.log("UI populated.");
+        document.getElementById('dev-name').textContent = data.developer.name;
+        document.getElementById('dev-nim').textContent = data.developer.nim;
+        document.getElementById('dev-email').textContent = data.developer.email;
+        document.getElementById('dev-email').href = `mailto:${data.developer.email}`;
+        document.getElementById('dev-github').href = data.developer.github_url;
+        document.getElementById('dev-github').textContent = data.developer.github_text;
+        document.getElementById('dev-skills').textContent = data.developer.skills;
     }
 
     function setupObservers() {
         const sections = document.querySelectorAll('.page-section');
         const navLinks = document.querySelectorAll('nav a');
         const backgroundOverlay = document.getElementById('background-overlay');
-        let currentBg = ''; 
+        let currentBg = '';
 
-        if (!backgroundOverlay) return;
-
-        const animationObserver = new IntersectionObserver((entries, observer) => {
+        const fadeObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const container = entry.target.querySelector('.container');
-                    if (container) {
-                        container.classList.add('visible');
-                    }
+                    if (container) container.classList.add('visible');
                 }
             });
         }, { threshold: 0.1 });
@@ -103,10 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (entry.isIntersecting) {
                     const id = entry.target.getAttribute('id');
                     navLinks.forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === `#${id}`) {
-                            link.classList.add('active');
-                        }
+                        link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
                     });
                 }
             });
@@ -115,28 +91,25 @@ document.addEventListener('DOMContentLoaded', function () {
         const bgObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const newBgUrl = entry.target.getAttribute('data-bg');
-
-                    if (newBgUrl && newBgUrl !== currentBg) {
+                    const newBg = entry.target.getAttribute('data-bg');
+                    if (newBg && newBg !== currentBg) {
                         const img = new Image();
-                        img.src = newBgUrl;
-
-                        img.onload = function() {
-                            currentBg = newBgUrl;
+                        img.src = newBg;
+                        img.onload = () => {
+                            currentBg = newBg;
                             backgroundOverlay.style.opacity = 0;
-
-                            backgroundOverlay.addEventListener('transitionend', function() {
-                                backgroundOverlay.style.backgroundImage = `url('${newBgUrl}')`;
+                            backgroundOverlay.addEventListener('transitionend', () => {
+                                backgroundOverlay.style.backgroundImage = `url('${newBg}')`;
                                 backgroundOverlay.style.opacity = 1;
-                             }, { once: true });
+                            }, { once: true });
                         };
-                     }
+                    }
                 }
-         });
+            });
         }, { threshold: 0.5 });
 
         sections.forEach(section => {
-            animationObserver.observe(section);
+            fadeObserver.observe(section);
             navObserver.observe(section);
             bgObserver.observe(section);
         });

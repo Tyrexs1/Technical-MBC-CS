@@ -1,3 +1,4 @@
+/* Reset dan Umum */
 * {
   margin: 0;
   padding: 0;
@@ -11,9 +12,10 @@ html {
 body {
   font-family: 'Poppins', sans-serif;
   line-height: 1.6;
-  color: rgb(255, 255, 255);
+  color: #fff;
   overflow-x: hidden;
   position: relative;
+  background-color: #111;
 }
 
 body::before {
@@ -43,11 +45,7 @@ body::before {
   transition: opacity 0.8s ease-in-out;
 }
 
-main {
-  min-height: 100vh;
-  overflow-y: auto;
-}
-
+/* Section */
 .page-section {
   min-height: 100vh;
   width: 100%;
@@ -72,6 +70,7 @@ main {
   transform: translateY(0);
 }
 
+/* Typography */
 h2 {
   font-size: 2.5rem;
   font-weight: 700;
@@ -84,10 +83,10 @@ h3 {
   word-wrap: break-word;
 }
 
+/* Header */
 header {
   background: rgba(0, 0, 0, 0.479);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid #ffffff00;
   position: fixed;
   top: 0;
   left: 0;
@@ -108,6 +107,7 @@ header {
   display: block;
 }
 
+/* Navigasi */
 nav a {
   margin-left: 25px;
   color: #ffffff;
@@ -138,6 +138,7 @@ nav a.active::after {
   width: 100%;
 }
 
+/* About */
 .about-content {
   display: flex;
   align-items: center;
@@ -150,6 +151,7 @@ nav a.active::after {
   height: auto;
 }
 
+/* Divisi */
 .division-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -185,6 +187,7 @@ nav a.active::after {
   color: #ffffff;
 }
 
+/* Kontak */
 .contact-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -224,6 +227,7 @@ nav a.active::after {
   transform: scale(1.1);
 }
 
+/* Developer */
 .developer-layout {
   background: #000000ae;
   padding: 2rem;
@@ -254,6 +258,7 @@ nav a.active::after {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
+/* Responsive */
 @media (max-width: 768px) {
   main {
     scroll-snap-type: none; 
