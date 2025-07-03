@@ -1,15 +1,3 @@
-const express = require('express');
-const cors = require('cors');
-const path = require('path');
-
-const app = express();
-
-app.use(cors());
-
-app.use('/Asset', express.static(path.join(__dirname, '..', 'public', 'Asset')));
-
-app.use(express.static(path.join(__dirname, '..', 'public')));
-
 const siteData = {
   about_text:
     "MBC Laboratory, singkatan dari Multimedia, Big Data, dan Cyber Security Laboratory, merupakan salah satu entitas penelitian yang beroperasi di bawah Kementerian Komunikasi dan Multimedia (KK NCM). Fokus utama laboratorium ini adalah mempelajari dan mengembangkan pengetahuan di bidang Cyber Security, Big Data, dan Multimedia. Didirikan pada tanggal 4 Oktober 2019, MBC Laboratory telah menjadi pusat penelitian yang berdedikasi untuk memahami, mengatasi, dan mengembangkan solusi terkini dalam tiga bidang utamanya.",
@@ -56,10 +44,6 @@ const siteData = {
     skills: "HTML, CSS, JS, Kali Linux"
   }
 };
-
-app.get('/api', (req, res) => {
-  res.json(siteData);
-});
 
 module.exports = (req, res) => {
   res.status(200).json(siteData);
