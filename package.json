@@ -1,0 +1,9 @@
+{
+  "name": "mbc-lab-website",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Website company profile untuk MBC Laboratory",
+  "main": "api/index.js",
+  "author": "Roby Ariga Siagian",
+  "license": "ISC"
+}
