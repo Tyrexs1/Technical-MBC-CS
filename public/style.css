@@ -40,13 +40,13 @@ body::before {
   background-attachment: fixed;
   z-index: -2;
   opacity: 1;
-  transition: opacity 0.10s ease-in-out;
+  transition: opacity 0.8s ease-in-out;
 }
 
 main {
   min-height: 100vh;
   overflow-y: auto;
-  scroll-snap-type: y mandatory;
+  /* scroll-snap-type: y mandatory; */ /* <-- DINONAKTIFKAN untuk animasi lebih mulus */
 }
 
 .page-section {
@@ -65,7 +65,8 @@ main {
   margin: 0 auto 2rem auto;
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  /* DIPERBAIKI: Durasi diperpanjang untuk efek lebih halus */
+  transition: opacity 0.9s ease-out, transform 0.9s ease-out;
 }
 
 .container.visible {
@@ -258,7 +259,7 @@ nav a.active::after {
 /* Responsive */
 @media (max-width: 768px) {
   main {
-    scroll-snap-type: none;
+    scroll-snap-type: none; /* Tetap dinonaktifkan di mobile */
   }
 
   h2 {
