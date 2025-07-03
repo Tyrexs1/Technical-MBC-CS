@@ -46,7 +46,6 @@ body::before {
 main {
   min-height: 100vh;
   overflow-y: auto;
-  /* scroll-snap-type: y mandatory; */ /* <-- DINONAKTIFKAN untuk animasi lebih mulus */
 }
 
 .page-section {
@@ -65,7 +64,6 @@ main {
   margin: 0 auto 2rem auto;
   opacity: 0;
   transform: translateY(30px);
-  /* DIPERBAIKI: Durasi diperpanjang untuk efek lebih halus */
   transition: opacity 0.9s ease-out, transform 0.9s ease-out;
 }
 
@@ -256,10 +254,9 @@ nav a.active::after {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   main {
-    scroll-snap-type: none; /* Tetap dinonaktifkan di mobile */
+    scroll-snap-type: none; 
   }
 
   h2 {

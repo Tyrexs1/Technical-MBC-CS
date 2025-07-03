@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
+
     function loadContent() {
         fetch('/api')
             .then(response => {
@@ -8,16 +9,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 return response.json();
             })
             .then(data => {
-                console.log(" Data loaded:", data);
+                console.log("Data loaded:", data);
                 populatePage(data);
+                setupObservers(); 
             })
             .catch(error => {
-                console.error(' Fetch Error:', error);
+                console.error('Fetch Error:', error);
                 document.body.innerHTML = `<div style="text-align: center; padding: 50px; font-family: 'Poppins', sans-serif;">
-                                            <h2 style="color: #d93025;">Gagal Memuat Data</h2>
-                                            <p>Pastikan server lokal (misalnya Node.js) berjalan dan file <strong>api.js</strong> aktif.</p>
-                                            <p><em>Error: ${error.message}</em></p>
-                                           </div>`;
+                                                <h2 style="color: #d93025;">Gagal Memuat Data</h2>
+                                                <p>Pastikan server lokal (misalnya Node.js) berjalan dan file <strong>api.js</strong> aktif.</p>
+                                                <p><em>Error: ${error.message}</em></p>
+                                               </div>`;
             });
     }
 
@@ -74,13 +76,16 @@ document.addEventListener('DOMContentLoaded', function () {
         const devSkills = document.getElementById('dev-skills');
         if (devSkills) devSkills.textContent = data.developer.skills;
 
-        console.log(" UI populated.");
+        console.log("UI populated.");
     }
 
     function setupObservers() {
         const sections = document.querySelectorAll('.page-section');
         const navLinks = document.querySelectorAll('nav a');
         const backgroundOverlay = document.getElementById('background-overlay');
+        let currentBg = ''; 
+
+        if (!backgroundOverlay) return;
 
         const animationObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
@@ -89,7 +94,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (container) {
                         container.classList.add('visible');
                     }
-                    observer.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.1 });
@@ -110,14 +114,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const bgObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting && backgroundOverlay) {
+                if (entry.isIntersecting) {
                     const newBg = entry.target.getAttribute('data-bg');
-                    if (newBg) {
+
+                    if (newBg && newBg !== currentBg) {
+                        currentBg = newBg; 
+                        
                         backgroundOverlay.style.opacity = 0;
-                        setTimeout(() => {
+
+                        backgroundOverlay.addEventListener('transitionend', function changeBg() {
+
                             backgroundOverlay.style.backgroundImage = `url('${newBg}')`;
+                            
                             backgroundOverlay.style.opacity = 1;
-                        }, 300);
+
+                            backgroundOverlay.removeEventListener('transitionend', changeBg);
+                        });
                     }
                 }
             });
@@ -131,5 +143,4 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     loadContent();
-    setupObservers();
 });
