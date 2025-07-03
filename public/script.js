@@ -118,24 +118,21 @@ document.addEventListener('DOMContentLoaded', function () {
                     const newBgUrl = entry.target.getAttribute('data-bg');
 
                     if (newBgUrl && newBgUrl !== currentBg) {
-                    
-                        const img = new Image(); 
-                        img.src = newBgUrl;      
+                        const img = new Image();
+                        img.src = newBgUrl;
 
                         img.onload = function() {
-                            currentBg = newBgUrl; 
-                        
+                            currentBg = newBgUrl;
                             backgroundOverlay.style.opacity = 0;
 
-                            backgroundOverlay.addEventListener('transitionend', function changeBg() {
+                            backgroundOverlay.addEventListener('transitionend', function() {
                                 backgroundOverlay.style.backgroundImage = `url('${newBgUrl}')`;
                                 backgroundOverlay.style.opacity = 1;
-                                backgroundOverlay.removeEventListener('transitionend', changeBg);
-                            }, { once: true }); 
+                             }, { once: true });
                         };
-                    }
+                     }
                 }
-            });
+         });
         }, { threshold: 0.5 });
 
         sections.forEach(section => {
