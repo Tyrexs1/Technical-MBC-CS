@@ -83,11 +83,24 @@ document.addEventListener('DOMContentLoaded', function () {
         const sections = document.querySelectorAll('.page-section');
         const navLinks = document.querySelectorAll('nav a');
         const backgroundOverlay = document.getElementById('background-overlay');
-        let currentBg = ''; 
+        let currentBg = '';
 
         if (!backgroundOverlay) return;
 
-        const animationObserver = new IntersectionObserver((entries, observer) => {
+        function preloadAllBackgrounds() {
+            console.log("Preloading all background images...");
+            sections.forEach(section => {
+                const bgUrl = section.getAttribute('data-bg');
+                if (bgUrl) {
+                    const img = new Image(); 
+                    img.src = bgUrl;        
+                }
+            });
+        }
+
+        preloadAllBackgrounds();
+
+        const animationObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const container = entry.target.querySelector('.container');
@@ -116,24 +129,18 @@ document.addEventListener('DOMContentLoaded', function () {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const newBgUrl = entry.target.getAttribute('data-bg');
-
                     if (newBgUrl && newBgUrl !== currentBg) {
-                        const img = new Image();
-                        img.src = newBgUrl;
-
-                        img.onload = function() {
-                            currentBg = newBgUrl;
-                            backgroundOverlay.style.opacity = 0;
-
-                            backgroundOverlay.addEventListener('transitionend', function() {
-                                backgroundOverlay.style.backgroundImage = `url('${newBgUrl}')`;
-                                backgroundOverlay.style.opacity = 1;
-                             }, { once: true });
-                        };
-                     }
+                        currentBg = newBgUrl;
+                        backgroundOverlay.style.opacity = 0;
+                        backgroundOverlay.addEventListener('transitionend', function changeBg() {
+                            backgroundOverlay.style.backgroundImage = `url('${newBgUrl}')`;
+                            backgroundOverlay.style.opacity = 1;
+                        }, { once: true });
+                    }
                 }
-         });
+            });
         }, { threshold: 0.5 });
+
 
         sections.forEach(section => {
             animationObserver.observe(section);
