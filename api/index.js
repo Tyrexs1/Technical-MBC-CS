@@ -41,5 +41,5 @@ const siteData = {
 };
 
 export default function handler(req, res) {
-  res.status(200).json(siteData);
+  res.status(200).json({ message: "API berhasil!" }); // atau `siteData` kalau sudah
 }
