@@ -115,21 +115,24 @@ document.addEventListener('DOMContentLoaded', function () {
         const bgObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const newBg = entry.target.getAttribute('data-bg');
+                    const newBgUrl = entry.target.getAttribute('data-bg');
 
-                    if (newBg && newBg !== currentBg) {
-                        currentBg = newBg; 
+                    if (newBgUrl && newBgUrl !== currentBg) {
+                    
+                        const img = new Image(); 
+                        img.src = newBgUrl;      
+
+                        img.onload = function() {
+                            currentBg = newBgUrl; 
                         
-                        backgroundOverlay.style.opacity = 0;
+                            backgroundOverlay.style.opacity = 0;
 
-                        backgroundOverlay.addEventListener('transitionend', function changeBg() {
-
-                            backgroundOverlay.style.backgroundImage = `url('${newBg}')`;
-                            
-                            backgroundOverlay.style.opacity = 1;
-
-                            backgroundOverlay.removeEventListener('transitionend', changeBg);
-                        });
+                            backgroundOverlay.addEventListener('transitionend', function changeBg() {
+                                backgroundOverlay.style.backgroundImage = `url('${newBgUrl}')`;
+                                backgroundOverlay.style.opacity = 1;
+                                backgroundOverlay.removeEventListener('transitionend', changeBg);
+                            }, { once: true }); 
+                        };
                     }
                 }
             });
