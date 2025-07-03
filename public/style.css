@@ -40,7 +40,7 @@ body::before {
   background-attachment: fixed;
   z-index: -2;
   opacity: 1;
-  transition: opacity 0s ease-in-out;
+  transition: opacity 0.10s ease-in-out;
 }
 
 main {
