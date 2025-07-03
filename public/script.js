@@ -113,7 +113,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (entry.isIntersecting && backgroundOverlay) {
                     const newBg = entry.target.getAttribute('data-bg');
                     if (newBg) {
-                        // Tambahkan transisi manual agar smooth
                         backgroundOverlay.style.opacity = 0;
                         setTimeout(() => {
                             backgroundOverlay.style.backgroundImage = `url('${newBg}')`;
