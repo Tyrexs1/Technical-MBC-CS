@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         </div>
                     </div>
                 `;
-                divisionGrid.innerHTML += cardHTML;
+                divisionGrid.insertAdjacentHTML('beforeend', cardHTML);
             });
         }
 
